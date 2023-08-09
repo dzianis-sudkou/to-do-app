@@ -1,12 +1,17 @@
 <template>
-    <v-container>
+    <v-container class="px-0" fluid>
         <li>
             <span v-bind:class="{ done: task.completed }">
-                <input type="checkbox" @change="$emit('change-state', task)">
-                <strong>{{ task.id }}</strong>
+            <input type="checkbox" fixed @change="$emit('change-state', task)">
+            <strong>{{ index + 1 }}</strong>
                 {{ task.title }}
             </span>
-            <button class="rm" @click="$emit('remove-task', task.id)">&times;</button>
+            <!-- <button class="rm" @click="$emit('remove-task', task.id)">&times;</button> -->
+            <v-btn class="mx"  @click="$emit('remove-task', task.id)" fab dark small color="red">
+                <v-icon dark>
+                    mdi-trash-can
+                </v-icon>
+            </v-btn>
         </li>
     </v-container>
 </template>
@@ -17,31 +22,25 @@ export default {
         task: {
             type: Object,
             required: true
-        }
+        },
+        index: Number
     },
 }
 </script>
   
 <style scoped>
 li {
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     display: flex;
     justify-content: space-between;
     padding: .5rem 2rem;
-    margin-bottom: 1rem;
+    margin: 0.5rem;
+    border-radius: 1rem;
+    align-items: center;
 }
-
-.rm {
-    background: red;
-    color: #fff;
-    border-radius: 50%;
-    font-weight: bold;
-}
-
 .done {
     text-decoration: line-through;
 }
-
 input {
     margin-right: 1rem;
 }

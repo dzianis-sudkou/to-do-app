@@ -1,7 +1,9 @@
 <template>
     <v-container>
         <ul>
-            <TodoTask v-for="(task, index) in tasks" :task="task" :key="index" @change-state="changeState"
+            <TodoTask v-for="(task, index) in tasks" 
+            :index="index"
+            :task="task" :key="index" @change-state="changeState"
                 @remove-task="removeTask" />
         </ul>
     </v-container>
