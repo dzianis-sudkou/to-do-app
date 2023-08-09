@@ -1,9 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/HomeView.vue'
 
 Vue.use(VueRouter)
 
 export default new VueRouter({
-  mode: 'history'
+  mode: 'history',
+  routes:[
+    {
+      path: '/',
+      component: HomeView
+    },
+    {
+      path: '/tasks',
+      component: () => import('../views/TasksView.vue')
+    }
+  ]
 })
