@@ -4,22 +4,28 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import newTasks from '../mocks/tasks'
+import users from '../mocks/users'
 
 export default new Vuex.Store({
   state: {
-      tasks: newTasks,
-      count: 0
+    users: users,
+    tasks: newTasks,
+    currentUser: '',
+    count: 0
   },
   getters: {
-    getList: state =>{
+    getList: state => {
       return state.tasks
     },
-    getFilteredList: state =>{
+    getFilteredList: state => {
       return state.tasks.filter(task => task.completed)
     },
     receiveState: state => index => {
       return state.tasks.at(index).completed;
-    }
+    },
+    getUsername:  state => {
+      return state.currentUser
+    },
   },
   mutations: {
     increment(state) {
@@ -30,18 +36,20 @@ export default new Vuex.Store({
       state.tasks.push(task)
     },
     removeTask(state, id) {
-        state.tasks = state.tasks.filter(t => t.id != id)
+      state.tasks = state.tasks.filter(t => t.id != id)
     },
-    list(state){
-      return state.tasks
-    },
-    renameTask(state, [newTitle, index]){
+    renameTask(state, [newTitle, index]) {
       state.tasks.at(index).title = newTitle
     },
-    changeState(state, index){
+    changeState(state, index) {
       console.log(state.tasks.at(index).completed)
       state.tasks.at(index).completed = !state.tasks.at(index).completed
       console.log(state.tasks.at(index).completed)
+    },
+    newLogin(state, name) {
+      state.users.push({name: name})
+      state.currentUser = name
+      console.log(state.currentUser)
     }
   },
   actions: {

@@ -18,6 +18,10 @@ export default new VueRouter({
     {
       path: '/archive',
       component: () => import('../views/ArchiveView.vue')
+    },
+    {
+      path: '/login',
+      component: () => import('../views/LoginView.vue')
     }
   ]
 })
