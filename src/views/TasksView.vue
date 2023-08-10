@@ -1,9 +1,7 @@
 <template>
     <div>
         <AddTask />
-        <div id="archive">
-            <router-link to="/archive">Archive</router-link>
-        </div>
+        
         <TodoList :tasks="receiveTasks" v-if="receiveTasks.length" />
         <p style="text-align: center; margin-top: 2rem; font-size: large;" v-else>You have finished all your tasks 🥳 </p>
         
@@ -35,8 +33,3 @@ export default {
 }
 </script>
 
-<style>
-.archive{
-    text-align: center;
-}
-</style>
