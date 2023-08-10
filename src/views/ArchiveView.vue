@@ -6,7 +6,7 @@
 
         <v-layout row wrap justify-center style="margin-top: 1rem;">
             <v-flex xs3>
-                <v-text-field type="text" v-model="text"></v-text-field>
+                <v-text-field type="text" v-model="text" label="Search..."></v-text-field>
             </v-flex>
         </v-layout>
 
