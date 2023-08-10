@@ -17,7 +17,8 @@ export default {
         title: {
             type: String,
             default: ''
-        }
+        },
+        index: Number
     },
     data() {
         return {
@@ -26,7 +27,9 @@ export default {
     },
     methods: {
         onSubmit() {
-            this.$emit('rename', this.newTitle)
+            // this.$emit('rename', this.newTitle)
+            this.$store.commit('renameTask', [this.newTitle, this.index])
+            this.$emit('close')
         },
     }
 }

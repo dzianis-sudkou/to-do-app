@@ -2,7 +2,7 @@
     <v-container class="px-0">
         <li>
             <span v-bind:class="{ done: task.completed }">
-                <input type="checkbox" fixed @change="$emit('change-state', task)" v-model="state">
+                <input type="checkbox" fixed @change="changeState" :checked="receiveState">
                 <strong>{{ index + 1 }}</strong>
                 {{ task.title }}
             </span>
@@ -14,7 +14,7 @@
                         mdi-rename
                     </v-icon>
                 </v-btn>
-                <v-btn id="delete" class="mx" @click="$emit('remove-task', task.id)" fab dark small color="red">
+                <v-btn id="delete" class="mx" @click="removeTask" fab dark small color="red">
                     <v-icon dark>
                         mdi-trash-can
                     </v-icon>
@@ -23,8 +23,9 @@
         </li>
         <RenameModal 
         v-if="isModalOpen" 
-        @rename="rename"
+        @close="close"
         :title="task.title"
+        :index="index"
         >
         </RenameModal>
     </v-container>
@@ -44,17 +45,25 @@ export default {
     data() {
         return {
             isModalOpen: false,
-            state: this.task.completed
         }
     },
     methods: {
+        changeState() {
+            this.$store.commit('changeState', this.index)
+        },
         openModal() {
             this.isModalOpen = true
         },
-        rename(value){
-            console.log(value)
-            this.$emit('renameTask', [value, this.index])
+        close(){
             this.isModalOpen = false
+        },
+        removeTask() {
+            this.$store.commit('removeTask', this.task.id)
+        }
+    },
+    computed:{
+        receiveState(){
+            return this.$store.getters.receiveState(this.index)
         }
     },
     components: {

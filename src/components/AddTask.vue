@@ -25,7 +25,7 @@ export default {
                     title:this.title,
                     completed:false
                 }
-                this.$emit('add-task', newTask)
+                this.$store.commit('addTask', newTask)
                 this.title=''
             }
         }

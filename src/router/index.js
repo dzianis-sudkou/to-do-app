@@ -14,6 +14,10 @@ export default new VueRouter({
     {
       path: '/tasks',
       component: () => import('../views/TasksView.vue')
+    },
+    {
+      path: '/archive',
+      component: () => import('../views/ArchiveView.vue')
     }
   ]
 })

@@ -3,9 +3,9 @@
         <ul>
             <TodoTask v-for="(task, index) in tasks" 
             :index="index"
-            :task="task" :key="index" @change-state="changeState"
-            @remove-task="removeTask"
-            @renameTask="renameTask"
+            :task="task" 
+            :key="index" 
+            @change-state="changeState"
             />
         </ul>
     </v-container>
@@ -31,9 +31,6 @@ export default {
         },
         print() {
             console.log(this.text)
-        },
-        removeTask(id) {
-            this.$emit('remove-task', id)
         },
         renameTask([value, id]){
             console.log(value,id)
