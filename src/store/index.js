@@ -8,8 +8,8 @@ export default new Vuex.Store({
   },
   getters: {
   },
-  // mutations: {
-  // },
+  mutations: {
+  },
   actions: {
   },
   modules: {

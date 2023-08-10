@@ -4,7 +4,9 @@
             <TodoTask v-for="(task, index) in tasks" 
             :index="index"
             :task="task" :key="index" @change-state="changeState"
-            @remove-task="removeTask" />
+            @remove-task="removeTask"
+            @renameTask="renameTask"
+            />
         </ul>
     </v-container>
 </template>
@@ -32,6 +34,10 @@ export default {
         },
         removeTask(id) {
             this.$emit('remove-task', id)
+        },
+        renameTask([value, id]){
+            console.log(value,id)
+            this.$emit('rename-task', [value, id])
         }
     },
     components: {

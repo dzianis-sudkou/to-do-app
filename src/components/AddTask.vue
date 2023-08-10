@@ -1,7 +1,7 @@
 <template>
     <v-form class="input" @submit.prevent="onSubmit" >
         <input type="text" class="inputfield" v-model="title">
-        <v-btn height="2rem"  type="submit" @submit.prevent="" class="mx" large color="primary">
+        <v-btn height="2rem"  type="submit" class="mx" large color="primary">
             <v-icon dark>
                 mdi-plus-box
             </v-icon>

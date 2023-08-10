@@ -1,24 +1,38 @@
 <template>
-    <v-container class="px-0" fluid>
+    <v-container class="px-0">
         <li>
             <span v-bind:class="{ done: task.completed }">
-                <input type="checkbox" fixed
-                    @change="$emit('change-state', task)"
-                    >
+                <input type="checkbox" fixed @change="$emit('change-state', task)" v-model="state">
                 <strong>{{ index + 1 }}</strong>
                 {{ task.title }}
             </span>
+
             <!-- <button class="rm" @click="$emit('remove-task', task.id)">&times;</button> -->
-            <v-btn class="mx" @click="$emit('remove-task', task.id)" fab dark small color="red">
-                <v-icon dark>
-                    mdi-trash-can
-                </v-icon>
-            </v-btn>
+            <div id="buttons">
+                <v-btn id="rename" class="mx" @click="openModal" fab dark small color="blue">
+                    <v-icon dark>
+                        mdi-rename
+                    </v-icon>
+                </v-btn>
+                <v-btn id="delete" class="mx" @click="$emit('remove-task', task.id)" fab dark small color="red">
+                    <v-icon dark>
+                        mdi-trash-can
+                    </v-icon>
+                </v-btn>
+            </div>
         </li>
+        <RenameModal 
+        v-if="isModalOpen" 
+        @rename="rename"
+        :title="task.title"
+        >
+        </RenameModal>
     </v-container>
 </template>
   
 <script>
+import RenameModal from './RenameModal.vue'
+
 export default {
     props: {
         task: {
@@ -27,6 +41,25 @@ export default {
         },
         index: Number
     },
+    data() {
+        return {
+            isModalOpen: false,
+            state: this.task.completed
+        }
+    },
+    methods: {
+        openModal() {
+            this.isModalOpen = true
+        },
+        rename(value){
+            console.log(value)
+            this.$emit('renameTask', [value, this.index])
+            this.isModalOpen = false
+        }
+    },
+    components: {
+        RenameModal
+    }
 }
 </script>
   
@@ -41,9 +74,19 @@ li {
     align-items: center;
 }
 
+#buttons {
+    text-align: center;
+}
+
+#delete {
+    margin-left: 1rem;
+}
+
 .done {
     text-decoration: line-through;
 }
+
 input {
     margin-right: 1rem;
-}</style>
+}
+</style>
