@@ -5,6 +5,7 @@
                 <input type="checkbox" fixed @change="changeState" :checked="receiveState">
                 <strong>{{ index + 1 }}</strong>
                 {{ task.title }}
+                <strong> {{ task.user }}</strong>
             </span>
 
             <!-- <button class="rm" @click="$emit('remove-task', task.id)">&times;</button> -->
@@ -21,12 +22,7 @@
                 </v-btn>
             </div>
         </li>
-        <RenameModal 
-        v-if="isModalOpen" 
-        @close="close"
-        :title="task.title"
-        :index="index"
-        >
+        <RenameModal v-if="isModalOpen" @close="close" :title="task.title" :index="index">
         </RenameModal>
     </v-container>
 </template>
@@ -54,15 +50,15 @@ export default {
         openModal() {
             this.isModalOpen = true
         },
-        close(){
+        close() {
             this.isModalOpen = false
         },
         removeTask() {
             this.$store.commit('removeTask', this.task.id)
         }
     },
-    computed:{
-        receiveState(){
+    computed: {
+        receiveState() {
             return this.$store.getters.receiveState(this.index)
         }
     },

@@ -19,19 +19,19 @@ export default [
     },
     {
         id: 4,
-        title: 'Task3',
+        title: 'Task4',
         completed: false,
         user: 'Anna'
     },
     {
         id: 5,
-        title: 'Task3',
+        title: 'Task535',
         completed: false,
         user: 'Cecilia'
     },
     {
         id: 6,
-        title: 'Task3',
+        title: 'Task53',
         completed: false,
         user: 'Vlad'
     },

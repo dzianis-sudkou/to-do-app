@@ -23,6 +23,7 @@ export default {
                 const newTask = {
                     id: Date.now(),
                     title:this.title,
+                    user: this.$store.getters.getUsername,
                     completed:false
                 }
                 this.$store.commit('addTask', newTask)
