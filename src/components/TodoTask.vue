@@ -2,13 +2,11 @@
     <v-container class="px-0">
         <li>
             <span v-bind:class="{ done: task.completed }">
-                <input type="checkbox" fixed @change="changeState" :checked="receiveState">
+                <input type="checkbox" class="checkbox" fixed @change="changeState" :checked="receiveState">
                 <strong>{{ index + 1 }}</strong>
                 {{ task.title }}
                 <strong> {{ task.user }}</strong>
             </span>
-
-            <!-- <button class="rm" @click="$emit('remove-task', task.id)">&times;</button> -->
             <div id="buttons">
                 <v-btn id="rename" class="mx" @click="openModal" fab dark small color="blue">
                     <v-icon dark>
@@ -45,7 +43,7 @@ export default {
     },
     methods: {
         changeState() {
-            this.$store.commit('changeState', this.index)
+            this.$store.commit('changeState', this.task.id)
         },
         openModal() {
             this.isModalOpen = true
@@ -59,7 +57,7 @@ export default {
     },
     computed: {
         receiveState() {
-            return this.$store.getters.receiveState(this.index)
+            return this.$store.getters.receiveState(this.task.id)
         }
     },
     components: {

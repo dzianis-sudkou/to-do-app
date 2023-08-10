@@ -3,16 +3,19 @@
         <h1 class="completati" justify-center>
             COMPLETATI
         </h1>
+
         <v-layout row wrap justify-center style="margin-top: 1rem;">
             <v-flex xs3>
-                <v-select :items="receiveUsers.map(n => n.name)" 
-                    v-model="filter" v-on:input="filters"
-                    label="Choose name" dense solo
-                    ></v-select>
+                <v-text-field type="text" v-model="text"></v-text-field>
             </v-flex>
         </v-layout>
 
-        <TodoList :tasks="arhiveFilter" />
+        <v-layout row wrap justify-center style="margin-top: 1rem;">
+            <v-flex xs3>
+                <v-select :items="receiveUsers.map(n => n.name)" v-model="filter" label="Choose name" dense solo></v-select>
+            </v-flex>
+        </v-layout>
+        <TodoList :tasks="archiveFilter" />
         <div class="back">
             <router-link style="text-decoration: none;" width="10rem" to="/tasks">
                 <v-btn dark color="success">
@@ -40,18 +43,20 @@ export default {
         receiveFilteredTasks() {
             return this.$store.getters.getFilteredList
         },
-        arhiveFilter(){
-            return this.$store.getters.archiveFilter(this.filter)
+        archiveFilter() {
+            return this.$store.getters.archiveFilter(this.filter, this.text)
         }
     },
-    data(){
+    data() {
         return {
-            filter: 'All'
+            filter: 'All',
+            text: '',
+            users:[]
         }
     },
     methods:{
-        filters(){
-            console.log(this.filter)
+        input(){
+            console.log(this.text)
         }
     }
 }
@@ -71,5 +76,8 @@ export default {
 
 .select {
     justify-content: center;
+}
+.input{
+    border: 1px green;
 }
 </style>

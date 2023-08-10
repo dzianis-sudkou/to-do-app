@@ -17,30 +17,40 @@ export default new Vuex.Store({
     getList: state => {
       return state.tasks
     },
-    receiveState: state => index => {
-      return state.tasks.at(index).completed;
+    receiveState: state => id => {
+      return state.tasks.filter(t => t.id == id)[0].completed;
     },
     getUsername:  state => {
       return state.currentUser
     },
     getUsersList: state => {
-      console.log(state.users)
+      state.users.unshift({
+        name: 'All'
+      })
       return state.users
     },
-    archiveFilter: state => user => {
-      if(user === 'All'){
+    getUsersArchiveList: state => {
+      state.users.unshift({
+        name: 'All'
+      })
+      return state.users
+    },
+    archiveFilter: state => (user,text) => {
+      if(user === 'All' && text === ''){ // Return all completed tasks
         return state.tasks.filter(task => task.completed)
       }
-      else{
-        return state.tasks.filter(t => t.completed && t.user === user)
-      }      
+      else if(user !== 'All'){ // Search only for tasks
+        const newTasks = state.tasks.filter(task => task.completed && task.user === user)
+        console.log(text)
+        return newTasks.filter(task => task.title.includes(text))
+      }
+      else if(user === 'All'){  // Search for users and tasks by the name
+        const UserText = state.tasks.filter(task => task.completed)
+        return UserText.filter(task => task.title.includes(text) || task.user.includes(text))
+      }
     }
   },
   mutations: {
-    increment(state) {
-      console.log(state.count)
-      state.count++
-    },
     addTask(state, task) {
       state.tasks.push(task)
     },
@@ -50,13 +60,12 @@ export default new Vuex.Store({
     renameTask(state, [newTitle, index]) {
       state.tasks.at(index).title = newTitle
     },
-    changeState(state, index) {
-      console.log(state.tasks.at(index).completed)
-      state.tasks.at(index).completed = !state.tasks.at(index).completed
-      console.log(state.tasks.at(index).completed)
+    changeState(state, id) {
+      state.tasks.filter(t => t.id === id)[0].completed = !state.tasks.filter(t => t.id === id)[0].completed
     },
     newLogin(state, name) {
       state.users.push({name: name})
+      console.log(state.users)
       state.currentUser = name
       console.log(state.currentUser)
     }

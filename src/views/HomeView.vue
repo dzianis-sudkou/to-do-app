@@ -1,15 +1,33 @@
 <template>
-  <div>
-    <h2>Home Page</h2>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis expedita fugit eaque, iusto ad delectus dolorem quos incidunt labore laboriosam, culpa facilis impedit. Eius quae veniam quia, adipisci earum laudantium!</p>
-    <router-link to="/tasks">Tasks</router-link>
-  </div>
+  <v-container>
+    <v-layout>
+
+
+      <v-layout row wrap justify-center style="margin-top: 2rem;">
+        <v-flex xs3>
+          <h1>Home Page</h1>
+          <p style="margin-top: 3rem;">This is my To-Do project. I'he used here Vuetify, VueJs, Vue-Router, VueX.
+            Progress: 5/6</p>
+          <router-link to="/tasks">
+            <v-btn class="mx" dark small color="success">
+              Tasks
+            </v-btn>
+          </router-link>
+          <v-btn class="mx" dark small color="success" style="margin-left: 3rem;">
+            <a href="https://github.com/dzianis-sudkou/to-do-app" style="text-decoration: none; color: white;">
+              Github
+            </a>
+          </v-btn>
+        </v-flex>
+      </v-layout>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-  export default {
-    name: 'HomeView',
-    components: {
-},
-  }
+export default {
+  name: 'HomeView',
+  components: {
+  },
+}
 </script>
