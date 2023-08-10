@@ -17,15 +17,24 @@ export default new Vuex.Store({
     getList: state => {
       return state.tasks
     },
-    getFilteredList: state => {
-      return state.tasks.filter(task => task.completed)
-    },
     receiveState: state => index => {
       return state.tasks.at(index).completed;
     },
     getUsername:  state => {
       return state.currentUser
     },
+    getUsersList: state => {
+      console.log(state.users)
+      return state.users
+    },
+    archiveFilter: state => user => {
+      if(user === 'All'){
+        return state.tasks.filter(task => task.completed)
+      }
+      else{
+        return state.tasks.filter(t => t.completed && t.user === user)
+      }      
+    }
   },
   mutations: {
     increment(state) {
